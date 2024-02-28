@@ -1,0 +1,51 @@
+<h3>{{titre}}</h3>
+<h4>Ajout d'assignment</h4>
+<form ngForm class="form" #assignmentForm (submit)="onSubmit()">
+    
+    <mat-form-field>
+        <input matInput [(ngModel)]="nomDevoir" name="nom">
+    </mat-form-field>
+    <button mat-stroked-button color="primary" [disabled]="!ajoutActive" >
+        Ajouter de devoir
+    </button>
+</form>
+<p>Angular inferieur a 17</p>
+<p>Boucle</p>
+<ul>
+    <li *ngFor="let item of assignments">
+        {{item.nom}}
+    </li>
+</ul>
+<p>Avec condition IF et ELSE</p>
+<div *ngFor="let assignment of assignments"
+    [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}"
+>
+    <p appRendu *ngIf="assignment.rendu; else nonsoumis">
+        Devoir intitulé {{assignment.nom}}, rendu le {{assignment.dateDeRendu}}.
+    </p>
+    <ng-template #nonsoumis>
+        Le devoir {{assignment.nom}} n'a pas été rendu.
+    </ng-template>
+</div>
+
+<p>Angular 17</p>
+<p>Boucle</p>
+
+    @for (item of assignments; track item.nom) {
+        <p>
+            Le devoir {{item.nom}} est à rendre le {{item.dateDeRendu}}.Soumis ou pas {{item.rendu}}
+        </p>
+    }
+
+<p>Conditions</p>
+    @for(item of assignments; track item.nom){
+        <div [ngStyle]="{'color': item.rendu ? 'green':'red'}" >
+            @if (item.rendu) {
+                <p>Le devoir {{item.nom}} a été rendu le {{item.dateDeRendu | date:"dd/MM/yyyy"}}.</p>
+            }@else{
+                <p>Le devoir de {{item.nom}} doit etre rendu le {{item.dateDeRendu |date:"dd/MM/yyyy"}}. </p>
+            }
+        </div>
+    }
+
+ 
