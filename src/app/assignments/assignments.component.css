@@ -1,11 +1,26 @@
-.rendu{
-    color:green;
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 20px;
 }
-.nonRendu{
-    color:red;
+
+.rendu {
+  color:green;
 }
-.form{
-    display:flex;
-    flex-direction: column;
-    margin: 5px;
+
+.nonRendu {
+  color:red;
+  background-color: yellow;
+  border:2px dashed purple;
+  padding:5px;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnAjout {
+  align-self: flex-end;
+}
+
