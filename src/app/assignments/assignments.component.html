@@ -1,15 +1,24 @@
 <h3>{{titre}}</h3>
 <h4>Ajout d'assignment</h4>
-<form ngForm class="form" #assignmentForm (submit)="onSubmit()">
-    
+<form ngForm class="form" #assignmentForm (submit)="onSubmit();assignmentForm.reset()">
+
     <mat-form-field>
         <input matInput [(ngModel)]="nomDevoir" name="nom">
     </mat-form-field>
+    <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+      
     <button mat-stroked-button color="primary" [disabled]="!ajoutActive" >
         Ajouter de devoir
     </button>
 </form>
-<p>Angular inferieur a 17</p>
+
+<h4>Angular inferieur a 17</h4>
 <p>Boucle</p>
 <ul>
     <li *ngFor="let item of assignments">
@@ -20,15 +29,16 @@
 <div *ngFor="let assignment of assignments"
     [ngClass]="{'rendu':assignment.rendu, 'nonRendu': !assignment.rendu}"
 >
+    <h3 mat-subheader> {{assignment.dateDeRendu | date}} </h3>
     <p appRendu *ngIf="assignment.rendu; else nonsoumis">
-        Devoir intitulé {{assignment.nom}}, rendu le {{assignment.dateDeRendu}}.
+        Devoir intitulé {{assignment.nom}} a été rendu.
     </p>
     <ng-template #nonsoumis>
-        Le devoir {{assignment.nom}} n'a pas été rendu.
+        Devoir intitulé {{assignment.nom}} n'a pas été rendu.
     </ng-template>
 </div>
 
-<p>Angular 17</p>
+<h5>Angular 17</h5>
 <p>Boucle</p>
 
     @for (item of assignments; track item.nom) {
@@ -48,4 +58,4 @@
         </div>
     }
 
- 
+    <app-assignment-detail></app-assignment-detail>
